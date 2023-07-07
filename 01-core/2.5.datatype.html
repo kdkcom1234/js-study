@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 동적 타입
+      // no error
+      let message = "hello";
+      message = 123456;
+
+      // number타입
+      let n = 123;
+      n = 12.345;
+
+      // number: Infinity
+      // alert(1 / 0);
+      // alert(Infinity);
+
+      // NaN(Not a Number)
+      // alert("숫자가아님" / 2);
+
+      // string
+      let name = "John";
+      // alert(`Hello. ${name}`);
+      // alert(`the result is ${1 + 2}`);
+
+      // boolean
+      let nameFieldChecked = true;
+      let ageFieldChecked = false;
+
+      // undefined
+      let age = 100;
+
+      age = 100;
+      age = 200;
+
+      // age = null;
+      alert(age);
+      alert(typeof age == "number");
+    </script>
+  </body>
+</html>
