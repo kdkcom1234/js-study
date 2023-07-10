@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function getName() {
+        return "";
+      }
+
+      let a = 0;
+      let b = "abc";
+
+      // ||: 첫번째 truthy를 반환
+      // a: falsy, b: truthy
+      // c <- b (c = b)
+      const c = a || b;
+      // alert(c);
+
+      // 단락 평가(short-circuit evalution)
+      // b: truthy, a는 평가하지 않음.
+      const d = b || a;
+      // alert(c);
+
+      // "" || alert("앞에 것이 falsy");
+      // getName() || alert("이름값이 없습니다");
+
+      // // &&: 첫번째 falsy를 반환
+      // const e = a && b;
+      // alert(e);
+      // // b: truhty, null: falsy
+      // const f = b && null && a;
+      // alert(f);
+
+      // boolean 값으로 변환
+      // !값: 반대 boolean
+      // !!값: 식 평가와 동일한 boolean
+      // alert(!a);
+      // alert(!!a);
+
+      // !!형변환 할 때
+      // 문자열변환: "" + 값
+      // 숫자변환: +값
+      // 불린변환: !!값
+    </script>
+  </body>
+</html>
