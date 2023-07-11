@@ -45,6 +45,18 @@
       // 문자열변환: "" + 값
       // 숫자변환: +값
       // 불린변환: !!값
+
+      const r = 0 || "" || null || undefined || "abc" || "def";
+      alert(r);
+      // null 또는 undefined아닌 값 찾기
+      // 존재하는 값을 찾는다..
+      const r2 = 0 ?? "" ?? null ?? undefined ?? "abc" ?? "def";
+      alert(r2);
+      const a1 = 0;
+      const a2 = "";
+      let a3;
+
+      const r3 = a3 ?? a1 ?? a2;
     </script>
   </body>
 </html>

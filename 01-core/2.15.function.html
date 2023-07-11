@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let userName = "홍길동";
+
+      // 매개변수의 default를 선언
+      // 매개변수 = 기본값
+      function showMessage(name = userName, text) {
+        // text 매개변수에 문자열이 있으면
+        // text 반환
+        // text 매개변수에 문자열이 없으면
+        // '안녕하세요!' 반환
+        let msg = text || "안녕하세요!";
+        alert(`${name}님, ${msg}`);
+      }
+
+      function showCount(count) {
+        // count에 null/undefined 일때만 'unknown'
+        alert(count ?? "unknown");
+      }
+
+      // 매개변수 1개(text매개변수는 undefined)
+      showMessage("고대근");
+      showMessage("명승정");
+      // 매개변수1개의 default가 있어 매개변수 없이 호출
+      // name, text 둘다 undefined인데, name은 기본값
+      showMessage();
+      // 매개변수 2개
+      showMessage("명승정", "남소나하고 잘하고 있다");
+    </script>
+  </body>
+</html>

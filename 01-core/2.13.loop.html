@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      while (true) {
+        const result = prompt(">100입력");
+        // 확인버튼 클릭 또는 취소
+        if (result === "" || result === null) {
+          break;
+        }
+        // 0이 아닌 숫자이면서 100보다 큰수
+        if (+result && result > 100) {
+          break;
+        }
+      }
+    </script>
+  </body>
+</html>
