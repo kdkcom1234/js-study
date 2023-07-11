@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 자바스크립트의 객체
+      // -> 자바와 Map하고 비슷한데
+      //     key는 문자열만 가능함
+      //     Map<Integer, String>
+      //     Map<String, ....>
+      //     { "1": 1234, "abc": "abcdasd" }
+
+      // let user = {}; // 빈객체로 초기화
+      // 객체를 상수로 선언
+      // 다른 객체로 덮의씌우지 않게 함
+      const user = {
+        // 속성(key, property): 값
+        name: "John",
+        age: 30,
+      };
+
+      // 속성값 접근
+      // 객체변수명.속성명
+      // console.log(user.name);
+
+      // console.log(user);
+
+      // 속성 추가
+      user.isAdmin = true;
+      // user["isAdmin"] = true;
+      // console.log(user);
+
+      // 속성 삭제
+      delete user.age;
+      // console.log(user);
+
+      // 속성값 변경
+      user.name = "Pete";
+      // console.log(user);
+
+      // // 상수라서 다른객체 대입 불가, 초기화 불가
+      // user = { orderId: 123454, product: "마스크" };
+      // console.log(user);
+
+      // 대괄호를 이용하여 객체 속성 접근할 수 있음
+      // console.log(user["name"]);
+      delete user["isAdmin"];
+
+      let prop = "name";
+      // console.log(user[prop]);
+
+      // let fruit = prompt("어떤 과일을 구매하시겠습니까?", "apple");
+      // let bag = {
+      //   [fruit]: 5, // 변수 fruit에서 프로퍼티 이름을 동적으로 받아 옵니다.
+      // };
+
+      // 사용자가 apple -> bag.apple, mango -> bag.mango
+
+      // function makeUser(name, age) {
+      //   // name, age 속성이 있는 객체를 생성해서 반환
+      //   return {
+      //     name: name,
+      //     age: age,
+      //   };
+      // }
+
+      // {}: 객체 생성문법
+      // 변수 = {..}, 객체를 생성해서 변수에 대입
+      // return {..}, 객체를 생성하여 반환
+      const makeUser = (name, age) => ({
+        // 속성명하고 값 변수명이 동일
+        // name:name, age:age
+        name,
+        age,
+      });
+
+      let u = makeUser("John", 30);
+      // console.log("--makeUser--");
+      // console.log(u);
+
+      // in 연산자로 속성 존재여부 확인
+      // "key" in object
+      // console.log("age" in u);
+
+      // for(속성명변수 in 객체변수)
+      for (let prop in u) {
+        // 객체의 속성명이 prop변수에
+        // 들어가면서 객체 속성 개수만큼 반복
+        // 탐색 순서는 속성을 추가한 순서대로
+        console.log(`${prop}: ${u[prop]}`);
+      }
+
+      const codes = { 49: "독일", 41: 스위스 };
+    </script>
+  </body>
+</html>
