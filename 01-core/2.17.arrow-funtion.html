@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body style="width: 100vw; height: 100vh">
+    <script>
+      document.querySelector("body").addEventListener("click", function () {
+        console.log("-- 함수 선언문 --");
+        // this: 함수를 호출한 객체(엘리먼트)
+        // this가 문맥(context)에 따라서 바뀜
+        console.log(this);
+      });
+
+      document.querySelector("body").addEventListener("click", () => {
+        console.log("-- 화살표 함수 --");
+        console.log(this);
+      });
+
+      // 함수 표현식
+      let sum = function (a, b) {
+        return a + b;
+      };
+
+      // 화살표 함수
+      const sum2 = (a, b) => {
+        const result = a + b;
+        return result;
+      };
+
+      // 화살표 함수
+      // 표현식에 구문이 1개라면
+      // 구문의 결과가 return값이다
+      let sum3 = (a, b) => a + b;
+
+      let findMax = (a, b) => (a > b ? a : b);
+      // function findMax2(a, b) {
+      //   return a > b ? a : b;
+      // }
+
+      // alert(sum3(1, 2));
+      alert(findMax(1230480091, 32341234));
+
+      let age = prompt("나이를 알려주세요.", 18);
+
+      let welcome = age < 18 ? () => alert("안녕") : () => alert("안녕하세요!");
+      welcome();
+
+      // let welcome2;
+      // if (age < 18) {
+      //   welcome2 = () => alert("안녕");
+      // } else {
+      //   welcome2 = () => alert("안녕하세요!");
+      // }
+      // welcome2();
+    </script>
+  </body>
+</html>
