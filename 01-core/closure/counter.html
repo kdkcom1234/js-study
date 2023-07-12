@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function createCounter() {
+        let count = 0;
+
+        return function () {
+          console.log(++count);
+        };
+      }
+
+      // 클로저 변수 공유 안 됨.
+      const counter1 = createCounter();
+      const counter2 = createCounter();
+
+      counter1();
+      counter1();
+      counter2();
+      counter2();
+      counter1();
+    </script>
+  </body>
+</html>

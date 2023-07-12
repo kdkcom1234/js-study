@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 클로저 객체 생성 기법
+      // 상태(변수값) 변경을 특정 함수만 접근 가능함
+      // 캡슐화에 용이하다.
+      // function useUser(name, age) {
+      //   let user = { name, age };
+
+      //   return [
+      //     function () {
+      //       return user;
+      //     },
+      //     function (name, age) {
+      //       user = { name, age };
+      //     },
+      //   ];
+      // }
+
+      // const [getUser, setUser] = useUser("Kim", 20);
+      // console.log(getUser());
+      // setUser("Ko", 30);
+      // console.log(getUser());
+
+      // 생성자 함수
+      // function User(name, age) {
+      //   this.name = name;
+      //   this.age = age;
+
+      //   this.setUser = (name, age) => {
+      //     this.name = name;
+      //     this.age = age;
+      //   };
+      // }
+
+      // const user = new User();
+      // user.name = "asdfasdf";
+      // console.log(user);
+
+      // class
+      class User {
+        name = "";
+        age = 0;
+        // #age = 0; // ES2022
+
+        constructor(name, age) {
+          this.name = name;
+          this.age = age;
+          // this.#age = age;
+        }
+
+        setUser(name, age) {
+          this.name = name;
+          this.age = age;
+          // this.#age = age;
+        }
+      }
+
+      const user = new User("Kim", 20);
+      console.log(user);
+      user.setUser("Ko", 30);
+      console.log(user);
+      console.log(user.age);
+
+      // 은닉을 향한 자바스크립트의 여정
+      // https://ui.toast.com/weekly-pick/ko_20200312
+
+      // Private class fields in Javascript (ES2022)
+      // https://dev.to/smitterhane/private-class-fields-in-javascript-es2022-3b8
+
+      // 클로저, 그리고 캡슐화와 은닉화
+      // https://blog.shiren.dev/2016-06-27-%ED%81%B4%EB%A1%9C%EC%A0%80,-%EA%B7%B8%EB%A6%AC%EA%B3%A0-%EC%BA%A1%EC%8A%90%ED%99%94%EC%99%80-%EC%9D%80%EB%8B%89%ED%99%94/
+    </script>
+  </body>
+</html>
