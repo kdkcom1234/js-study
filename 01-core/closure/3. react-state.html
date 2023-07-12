@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 클로저 객체 생성 기법
+      // 상태(변수값) 변경을 특정 함수만 접근 가능함
+      // 캡슐화에 용이하다.
+
+      class React {
+        static states = [];
+        static stateCount = 0;
+
+        static useState(initState) {
+          this.stateCount != 0 ? this.stateCount++ : "";
+          this.states[this.stateCount] = initState;
+
+          return [
+            this.states[this.stateCount],
+            (state) => {
+              // 렌더링 로직 실행(컴포넌트를 재실행)
+              // 렌더링 로직이 완료되면
+              // 상태값 변경
+              this.states[this.stateCount] = state;
+            },
+          ];
+        }
+      }
+
+      // 다시 렌더링 할 때 상태 배열에서 다시 꺼내옴
+      const [user, setUser] = React.useState({ name: "", age: 0 });
+      console.log(user);
+
+      const handleClick = () => {
+        setUser({ name: "Ko", age: 39 });
+        // 상태값은 바로 바뀌지 않음
+        console.log(user);
+      };
+
+      handleClick();
+
+      // React내의 상태값은 바뀜
+      console.log(React.states[0]);
+    </script>
+  </body>
+</html>
