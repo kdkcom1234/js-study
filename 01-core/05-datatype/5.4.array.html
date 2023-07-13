@@ -84,6 +84,52 @@
       console.log(fruits);
       fruits[9999] = 5;
       console.log(fruits);
+
+      // 배열요소 탐색
+      // for(요소변수 of 배열)
+      for (let fruit of fruits) {
+        console.log(fruit);
+      }
+
+      // for(인덱스변수 in 배열)
+      for (let index in fruits) {
+        console.log(fruits[index]);
+      }
+
+      // 배열 초기화
+      arr = [];
+
+      //
+      let matrix = [
+        ["Ko", "01045678383", 39],
+        ["Kim", "01021342134", 30],
+        ["Hong", "01012341234", 20],
+      ];
+
+      let matrix2 = [
+        ["Ko", ["010", "02", "02"], 39],
+        ["Kim", ["010", "02", "031"], 30],
+        ["Hong", ["010", "032", "02"], 20],
+      ];
+
+      let arr2 = [
+        {
+          name: "Ko",
+          phone: {
+            mobile: "010",
+            home: "02",
+            office: "02",
+          },
+          age: 39,
+        },
+      ];
+
+      matrix[0][0]; // 첫번째 데이터[0]의 이름[0]
+      matrix[0][1]; // 첫번째 데이터[0]의 전화번호[1]
+      matrix[0][2]; // 첫번째 데이터[0]의 나이[2]
+
+      // 첫번째 데이터[0], 전화번호[1], 회사번호[2]
+      matrix2[0][1][2];
     </script>
   </body>
 </html>
