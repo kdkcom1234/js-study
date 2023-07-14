@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let arr = ["I", "study", "Javascript"];
+      // arr.splice(삭제할시작인덱스, 삭제할요소개수)
+      // console.log(arr);
+      // 삭제할 요소 개수없이 인덱스만 넣으면
+      // 해당 인덱스포함하여 뒤에 있는 모든요소 삭제
+      // arr.splice(1);
+      // console.log(arr);
+
+      // arr.splice(1, 1);
+      // console.log(arr); // study 삭제었음
+      // console.log(arr.length); // 2
+
+      const toAddArr = ["learn", "Java"];
+      // 삭제한 요소가 반환이 된다.
+      // 특정위치에 여러개를 삭제시키고 꺼내오는 용도
+      const arr2 = arr.splice(1, 2, ...toAddArr);
+      // console.log(arr);
+      // console.log(arr2);
+
+      // string.slice와 동일
+      // 원래배열을 그대로고, 자른 것들은 반환 배열로
+      const arr3 = arr.slice(0, 2);
+      // console.log(arr);
+      // console.log(arr3);
+
+      // const newArr = source.concat([...])
+      let nums = [1, 2];
+
+      // 배열이 결합은 됐으나
+      // nums가 참조하는 배열은 동일하다
+      nums.splice(nums.length, 0, ...[3, 4]);
+      // console.log(nums);
+
+      // 배열이 결합되면서 새로운 참조배열이 생성
+      // nums가 참조하는 배열은 달라졌다.
+      nums = nums.concat([3, 4]);
+      // console.log(nums);
+
+      // nums.concat([3,4])와 동일
+      // nums = [...nums, ...[3,4]]
+      // console.log(nums);
+
+      // const newNums = nums.concat([3, 4]);
+      // console.log(newNums);
+
+      // for each
+      // arr.forEach: 요소 개수만큼 반복
+      // 배열인덱스가 필요하다(for .. in)
+      // 배열요소만 필요하다(for .. of)
+      // for(let index in arr) {
+      //   console.log(arr[index])
+      // }
+      // for(let elm of arr) {
+      //   console.log(elm)
+      // }
+      // ["Bilbo", "Gandalf", "Nazgul"].forEach(
+      //   (item, index, array) => {
+      //     console.log(
+      //       `${item} is at index ${index} in ${array}`
+      //     );
+      //   }
+      // );
+
+      // ["Bilbo", "Gandalf", "Nazgul"].forEach(
+      //   (item) => console.log(item)
+      // );
+
+      // ["Bilbo", "Gandalf", "Nazgul"].forEach(
+      //   (item, index) => console.log(index, item)
+      // );
+
+      const arr5 = [
+        { val: 1 },
+        { val: 2 },
+        { val: 3 },
+      ];
+
+      // obj -> arr5[0] : 참조상태일 때는 indexOf 됨
+      // obj = {...arr5[0]} : 새로운객체 indexOf X
+      // const obj = arr5[0];
+      const obj = { ...arr5[0] };
+      console.log(arr5.indexOf(obj));
+    </script>
+  </body>
+</html>
