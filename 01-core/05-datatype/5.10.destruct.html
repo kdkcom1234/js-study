@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const user = {
+        firstName: "Bora",
+        lastName: "Lee",
+      };
+
+      // ["Bora", "Lee"]
+      const arr = Object.values(user);
+      const [first, last] = arr;
+      console.log(first, last);
+
+      let [firstName, surname] = "Bora Lee".split(
+        " "
+      );
+
+      let options = {
+        title: "Menu",
+        width: 100,
+        height: 200,
+      };
+
+      // options.width -> width에 할당되고,
+      // width 변수에 이름을 w로 변경
+      let { width: w, height: h } = options;
+      console.log(w * h);
+    </script>
+  </body>
+</html>
