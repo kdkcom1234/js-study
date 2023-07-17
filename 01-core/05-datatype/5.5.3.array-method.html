@@ -96,10 +96,22 @@
             // 1회반복: sum<-0, num<-1 => sum: 1
             // 2회반복: sum<-1, num<-2 => sum: 3
             // ...
-            (sum, num) => sum + num,
+            (acc, num) => acc + num,
             0
           )}</div>`
         );
+
+      // arr.sum(요소마다실행할 함수)
+      // 함수의 반환이 true이면
+      // 조건에 맞는 요소가 있음
+
+      // true이면 찾은 것
+      const res1 = users.some(
+        (user) => user.name === "John"
+      );
+      const res2 = users.some(
+        (user) => user.id > 2
+      );
     </script>
   </body>
 </html>
