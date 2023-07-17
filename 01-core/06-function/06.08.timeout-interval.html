@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // setTimeOut(실행할함수, 시간(ms))
+      // 3000: 3초
+      const id = setTimeout(() => {
+        alert("안녕하세요.");
+      }, 3000);
+
+      console.log(id);
+
+      // 타임아웃 삭제
+      clearTimeout(id);
+
+      // setInterval(실행할함수, 시간(ms));
+      let count = 0;
+      const intervalId = setInterval(() => {
+        count++;
+        if (count > 3) {
+          // 인터벌 삭제
+          clearInterval(intervalId);
+        }
+        console.log(new Date().toTimeString());
+      }, 1000);
+    </script>
+  </body>
+</html>
