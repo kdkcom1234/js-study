@@ -34,13 +34,16 @@ let data = {
 createTree(container, data);
 
 function createTree(container, data) {
-  const ul = document.createElement("ul");
+  if (Object.keys(data).length > 0) {
+    const ul = document.createElement("ul");
 
-  for (let prop in data) {
-    const li = document.createElement("li");
-    li.textContent = prop;
-    ul.append(li);
-    createTree(ul, data[prop]);
+    for (let prop in data) {
+      const li = document.createElement("li");
+      li.textContent = prop;
+      ul.append(li);
+      createTree(li, data[prop]);
+    }
+
+    container.append(ul);
   }
-  container.append(ul);
 }
