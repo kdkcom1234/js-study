@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>시작</div>
+    <ul>
+      <li>항목: <data>1</data></li>
+      <li>항목: <data>2</data></li>
+      <li>항목: <data>3</data></li>
+    </ul>
+    <div>끝</div>
+
+    <script>
+      const ul = document.querySelector("ul");
+      console.log(ul.childNodes); // text노드 포함
+      console.log(ul.children); // html element만
+
+      const li = ul.children[1];
+
+      // 자식들(복수)
+      console.log(li.childNodes); // text노드 포함
+      console.log(li.children); // html element
+
+      // 부모
+      console.log(li.parentNode); // 노드
+      console.log(li.parentElement); // html element
+
+      // 바로 앞에 있는 형제/자매/남매
+      console.log(li.previousSibling); // 노드(text 포함)
+      console.log(li.previousElementSibling); // 엘리멘트
+
+      // 바로 뒤에 있는 형제/자매/남매
+      console.log(li.nextSibling);
+      console.log(li.nextElementSibling);
+    </script>
+  </body>
+</html>
