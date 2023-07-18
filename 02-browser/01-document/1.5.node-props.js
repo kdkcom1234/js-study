@@ -75,7 +75,7 @@ console.log(container.textContent);
 span.hidden = false;
 
 /* ------------ 그외 속성 관련 */
-console.log(div.id);
+console.log(container.id);
 
 // id나 class로 선택을하면 어떤 태그인지 잘 몰라
 // 태그마다 알맞 속성에 대한 자동완성 안 됨.
