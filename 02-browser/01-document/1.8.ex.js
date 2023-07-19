@@ -37,5 +37,5 @@ function showNotification({
   setTimeout(() => {
     // node.remove();
     box.remove();
-  }, 1500);
+  }, 1500);~
 }
