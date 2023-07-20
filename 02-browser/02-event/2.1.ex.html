@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Document</title>
+    <style>
+      h2 {
+        cursor: pointer;
+        /* 텍스트 선택(색칠)이 안 됨 */
+        -webkit-user-select: none; /* Safari */
+        user-select: none; /* Standard syntax */
+      }
+      i {
+        color: green;
+        font-style: normal;
+        margin-right: 0.5rem;
+        display: inline-block;
+        transition: transform 0.3s;
+      }
+    </style>
+  </head>
+  <body>
+    <h2><i>▶</i>Sweeties</h2>
+    <ul hidden>
+      <li>Cake</li>
+      <li>Donut</li>
+      <li>Honey</li>
+    </ul>
+    <script src="2.1.ex.js"></script>
+  </body>
+</html>
