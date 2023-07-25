@@ -11,7 +11,7 @@
 
   // 배열 반복을 해서 tr만든다음에 tbody 가장 마지막 자식에 추가
   for (let item of result) {
-    const template = `
+    const template = /*html*/ `
     <tr data-name="${item.name}">
       <td>${item.name}</td>
       <td>${item.phone}</td>
