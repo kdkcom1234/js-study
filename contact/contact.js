@@ -12,7 +12,7 @@
   // 배열 반복을 해서 tr만든다음에 tbody 가장 마지막 자식에 추가
   for (let item of result) {
     const template = /*html*/ `
-    <tr data-name="${item.name}">
+    <tr data-email="${item.email}">
       <td>${item.name}</td>
       <td>${item.phone}</td>
       <td>${item.email}</td>
@@ -23,9 +23,6 @@
     );
   }
 })();
-
-// 수정 처리
-(async () => {})();
 
 // 추가폼 처리
 (() => {
@@ -54,7 +51,7 @@
     const tbody = document.querySelector("tbody");
     const tr = document.createElement("tr");
     // 삭제할 때 사용하려고 데이터 속성을 추가함
-    tr.dataset.name = name.value;
+    tr.dataset.email = email.value;
 
     tr.innerHTML = `
     <td>
@@ -78,17 +75,17 @@
 (() => {
   const form = document.forms[1];
 
-  const name = form.querySelector("input");
+  const email = form.querySelector("input");
   const del = form.querySelector("button");
 
   del.addEventListener("click", (e) => {
     e.preventDefault();
     const tr = document.querySelector(
-      `tr[data-name="${name.value}"]`
+      `tr[data-email="${email.value}"]`
     );
 
     if (!tr) {
-      alert("해당 이름의 연락처 없습니다.");
+      alert("해당 이메일의 연락처 없습니다.");
       return;
     }
 
