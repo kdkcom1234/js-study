@@ -42,7 +42,7 @@
   // 컨테이너에 추가
   data.forEach((item) => {
     const template = /*html*/ `
-      <div style="width:300px; margin-bottom:2rem;" data-no="${
+      <div style="width:300px; margin-bottom:3rem;" data-no="${
         item.no
       }">
         <em>${item.creatorName}</em>
