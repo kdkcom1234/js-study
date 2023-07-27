@@ -1,3 +1,11 @@
+// template: UI형식의 틀
+function cellTemplate(name, phone, email) {
+  return `
+  <td>${name}</td>
+  <td>${phone}</td>
+  <td>${email}</td>`;
+}
+
 // 데이터 조회 및 목록 생성
 (async () => {
   const response = await fetch(
@@ -13,9 +21,11 @@
   for (let item of result) {
     const template = /*html*/ `
     <tr data-email="${item.email}">
-      <td>${item.name}</td>
-      <td>${item.phone}</td>
-      <td>${item.email}</td>
+      ${cellTemplate(
+        item.name,
+        item.phone,
+        item.email
+      )}
     </tr>`;
     tbody.insertAdjacentHTML(
       "afterbegin",
@@ -87,15 +97,12 @@
     tr.dataset.email = result.data.email;
 
     tr.innerHTML = `
-    <td>
-      ${name.value}
-    </td>
-    <td>
-      ${phone.value}
-    </td>
-    <td>
-      ${email.value}
-    </td>`;
+    ${cellTemplate(
+      name.value,
+      phone.value,
+      email.value
+    )}
+    `;
 
     // --- 3. 어딘가(부모, 다른요소)에 추가한다(append, prepend);
     const tbody = document.querySelector("tbody");
