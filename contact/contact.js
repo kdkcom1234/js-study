@@ -35,8 +35,13 @@
 
   const add = form.querySelector("button");
 
-  add.addEventListener("click", (e) => {
+  add.addEventListener("click", async (e) => {
     e.preventDefault();
+
+    if (email.value === "") {
+      alert("이메일을 입력해주세요.");
+      return;
+    }
 
     if (name.value === "") {
       alert("이름을 입력해주세요.");
@@ -48,10 +53,38 @@
       return;
     }
 
-    const tbody = document.querySelector("tbody");
+    // 서버에 데이터를 전송
+    // fetch(url, options)
+    const response = await fetch(
+      "http://localhost:8080/contacts",
+      {
+        // HTTP Method
+        method: "POST",
+        // 보낼 데이터 형식은 json
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email.value,
+          name: name.value,
+          phone: phone.value,
+        }),
+      }
+    );
+    console.log(response);
+
+    const result = await response.json();
+    console.log(result);
+
+    // 화면에 요소를 추가하는 것은 데이처리가 정상적으로 된 다음에
+
+    // --- 1. 추가할 요소 생성
     const tr = document.createElement("tr");
+
+    // --- 2. 추가할 요소의 속성을 설정
     // 삭제할 때 사용하려고 데이터 속성을 추가함
-    tr.dataset.email = email.value;
+    // **서버에서받은 데이터의 유일한 속성(key)
+    tr.dataset.email = result.data.email;
 
     tr.innerHTML = `
     <td>
@@ -64,6 +97,8 @@
       ${email.value}
     </td>`;
 
+    // --- 3. 어딘가(부모, 다른요소)에 추가한다(append, prepend);
+    const tbody = document.querySelector("tbody");
     tbody.prepend(tr);
     form.reset();
   });
