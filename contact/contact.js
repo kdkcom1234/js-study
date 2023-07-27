@@ -1,9 +1,12 @@
 // template: UI형식의 틀
-function cellTemplate(name, phone, email) {
-  return `
+function createRow(name, phone, email) {
+  const tr = document.createElement("tr");
+  tr.dataset.email = email;
+  tr.innerHTML = `
   <td>${name}</td>
   <td>${phone}</td>
   <td>${email}</td>`;
+  return tr;
 }
 
 // 데이터 조회 및 목록 생성
@@ -19,17 +22,8 @@ function cellTemplate(name, phone, email) {
 
   // 배열 반복을 해서 tr만든다음에 tbody 가장 마지막 자식에 추가
   for (let item of result) {
-    const template = /*html*/ `
-    <tr data-email="${item.email}">
-      ${cellTemplate(
-        item.name,
-        item.phone,
-        item.email
-      )}
-    </tr>`;
-    tbody.insertAdjacentHTML(
-      "afterbegin",
-      template
+    tbody.append(
+      createRow(item.name, item.phone, item.email)
     );
   }
 })();
@@ -88,25 +82,15 @@ function cellTemplate(name, phone, email) {
 
     // 화면에 요소를 추가하는 것은 데이처리가 정상적으로 된 다음에
 
-    // --- 1. 추가할 요소 생성
-    const tr = document.createElement("tr");
-
-    // --- 2. 추가할 요소의 속성을 설정
-    // 삭제할 때 사용하려고 데이터 속성을 추가함
-    // **서버에서받은 데이터의 유일한 속성(key)
-    tr.dataset.email = result.data.email;
-
-    tr.innerHTML = `
-    ${cellTemplate(
-      name.value,
-      phone.value,
-      email.value
-    )}
-    `;
-
     // --- 3. 어딘가(부모, 다른요소)에 추가한다(append, prepend);
     const tbody = document.querySelector("tbody");
-    tbody.prepend(tr);
+    tbody.prepend(
+      createRow(
+        name.value,
+        phone.value,
+        email.value
+      )
+    );
     form.reset();
   });
 
