@@ -1,6 +1,9 @@
 // template: UI형식의 틀
 function createRow(name, phone, email) {
+  // 1. 요소 생성
   const tr = document.createElement("tr");
+
+  // 2. 요소의 속성 설정
   tr.dataset.email = email;
   tr.innerHTML = `
   <td>${name}</td>
