@@ -38,6 +38,7 @@ function cardTemplate(item) {
     <small>${new Date(
       item.createdTime
     ).toLocaleString()}</small>
+    <button>삭제</button>
   </div>
 `;
   return template;
