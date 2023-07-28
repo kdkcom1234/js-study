@@ -9,7 +9,7 @@ function createRow(name, phone, email, image) {
   <td>${name}</td>
   <td>${phone}</td>
   <td>${email}</td>  
-  <td><img src="${image}" alt="${name}"></td>
+  <td><img width="auto" height="30" src="${image}" alt="${name}"></td>
   `;
   return tr;
 }
@@ -102,21 +102,20 @@ function createRow(name, phone, email, image) {
       console.log(result);
 
       // 화면에 요소를 추가하는 것은 데이처리가 정상적으로 된 다음에
+      // 서버에서 응답받은 데이터
+      const { data } = result;
 
       // --- 3. 어딘가(부모, 다른요소)에 추가한다(append, prepend);
-      const tbody =
-        document.querySelector("tbody");
-
-      const {
-        name,
-        phone,
-        email,
-        image: savedImage,
-      } = result.data;
-
-      tbody.prepend(
-        createRow(name, phone, email, savedImage)
-      );
+      document
+        .querySelector("tbody")
+        .prepend(
+          createRow(
+            data.name,
+            data.phone,
+            data.email,
+            data.image
+          )
+        );
       form.reset();
     });
     // 파일을 dataURL(base64)로 읽음
