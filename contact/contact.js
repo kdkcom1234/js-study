@@ -68,6 +68,7 @@ function createRow(name, phone, email, image) {
       return;
     }
 
+    // 데이터를 서버에 전송하고, UI요소 생성
     async function createContact(image) {
       /// --- 서버전송하면 UI 생성
 
