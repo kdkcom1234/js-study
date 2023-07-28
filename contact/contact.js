@@ -1,5 +1,5 @@
 // template: UI형식의 틀
-function createRow(name, phone, email) {
+function createRow(name, phone, email, image) {
   // 1. 요소 생성
   const tr = document.createElement("tr");
 
@@ -8,7 +8,9 @@ function createRow(name, phone, email) {
   tr.innerHTML = `
   <td>${name}</td>
   <td>${phone}</td>
-  <td>${email}</td>`;
+  <td>${email}</td>  
+  <td><img src="${image}" alt="${name}"></td>
+  `;
   return tr;
 }
 
@@ -26,7 +28,12 @@ function createRow(name, phone, email) {
   // 배열 반복을 해서 tr만든다음에 tbody 가장 마지막 자식에 추가
   for (let item of result) {
     tbody.append(
-      createRow(item.name, item.phone, item.email)
+      createRow(
+        item.name,
+        item.phone,
+        item.email,
+        item.image
+      )
     );
   }
 })();
@@ -39,10 +46,11 @@ function createRow(name, phone, email) {
   const name = inputs[0];
   const phone = inputs[1];
   const email = inputs[2];
+  const file = inputs[3]; // input type="file"
 
   const add = form.querySelector("button");
 
-  add.addEventListener("click", async (e) => {
+  add.addEventListener("click", (e) => {
     e.preventDefault();
 
     if (email.value === "") {
@@ -60,41 +68,61 @@ function createRow(name, phone, email) {
       return;
     }
 
-    // 서버에 데이터를 전송
-    // fetch(url, options)
-    const response = await fetch(
-      "http://localhost:8080/contacts",
-      {
-        // HTTP Method
-        method: "POST",
-        // 보낼 데이터 형식은 json
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email.value,
-          name: name.value,
-          phone: phone.value,
-        }),
-      }
-    );
-    console.log(response);
+    const reader = new FileReader();
+    // reader로 파일을 읽기가 완료되면 실행되면 이벤트 핸들러 함수
+    reader.addEventListener("load", async (e) => {
+      console.log(e);
+      // file -> base64 data-url
+      const image = e.target.result;
 
-    const result = await response.json();
-    console.log(result);
+      /// --- 서버전송하면 UI 생성
 
-    // 화면에 요소를 추가하는 것은 데이처리가 정상적으로 된 다음에
+      // 서버에 데이터를 전송
+      // fetch(url, options)
+      const response = await fetch(
+        "http://localhost:8080/contacts",
+        {
+          // HTTP Method
+          method: "POST",
+          // 보낼 데이터 형식은 json
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email.value,
+            name: name.value,
+            phone: phone.value,
+            image,
+          }),
+        }
+      );
+      console.log(response);
 
-    // --- 3. 어딘가(부모, 다른요소)에 추가한다(append, prepend);
-    const tbody = document.querySelector("tbody");
-    tbody.prepend(
-      createRow(
-        name.value,
-        phone.value,
-        email.value
-      )
-    );
-    form.reset();
+      const result = await response.json();
+      console.log(result);
+
+      // 화면에 요소를 추가하는 것은 데이처리가 정상적으로 된 다음에
+
+      // --- 3. 어딘가(부모, 다른요소)에 추가한다(append, prepend);
+      const tbody =
+        document.querySelector("tbody");
+
+      const {
+        name,
+        phone,
+        email,
+        image: savedImage,
+      } = result.data;
+
+      tbody.prepend(
+        createRow(name, phone, email, savedImage)
+      );
+      form.reset();
+    });
+    // 파일을 dataURL(base64)로 읽음
+    reader.readAsDataURL(file.files[0]);
+
+    // return;
   });
 
   console.log("추가폼 처리 코드");

@@ -17,10 +17,17 @@
     <h2>연락처 관리 프로그램</h2>
     <hr />
     <form action="">
+      <!-- MIME type -->
+      <!-- application/json, image/jpeg, image/png, text/html -->
       <label>*이름: <input type="text" /></label>
       <label>*휴대폰: <input type="tel" /></label>
       <label
         >이메일: <input type="email"
+      /></label>
+      <br />
+      <label
+        >이미지:
+        <input type="file" accept="image/*"
       /></label>
       <button>추가</button>
     </form>
