@@ -107,8 +107,17 @@ function createRow(name, phone, email) {
   const email = form.querySelector("input");
   const del = form.querySelector("button");
 
-  del.addEventListener("click", (e) => {
+  del.addEventListener("click", async (e) => {
     e.preventDefault();
+
+    // 서버통신
+    await fetch(
+      `http://localhost:8080/contacts/${email.value}`,
+      {
+        method: "DELETE",
+      }
+    );
+
     const tr = document.querySelector(
       `tr[data-email="${email.value}"]`
     );
