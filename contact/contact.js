@@ -9,7 +9,11 @@ function createRow(name, phone, email, image) {
   <td>${name}</td>
   <td>${phone}</td>
   <td>${email}</td>  
-  <td><img width="auto" height="30" src="${image}" alt="${name}"></td>
+  <td>${
+    image
+      ? `<img width="auto" height="30" src="${image}" alt="${name}">`
+      : ""
+  }</td>
   `;
   return tr;
 }
