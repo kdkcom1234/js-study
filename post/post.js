@@ -35,10 +35,12 @@ function cardTemplate(item) {
     <h3>${item.title}</h3>
     <p>${item.content}</p>
     <hr>
-    <small>${new Date(
-      item.createdTime
-    ).toLocaleString()}</small>
-    <button>삭제</button>
+    <div style="display:flex; justify-content:space-between;">
+      <small>${new Date(
+        item.createdTime
+      ).toLocaleString()}</small>
+      <button class="btn-remove">삭제</button>
+    </div>
   </div>
 `;
   return template;
@@ -107,5 +109,22 @@ function cardTemplate(item) {
       "afterend",
       cardTemplate(result.data)
     );
+  });
+})();
+
+// 삭제 기능(이벤트 위임)
+(() => {
+  document.body.addEventListener("click", (e) => {
+    alert(e.target.className);
+    // e.target: 실제 이벤트가 발생한요소
+    // 해당 클래스가 있는지 확인
+    if (
+      e.target.classList.contains("btn-remove")
+    ) {
+      // jsdoc type 힌트를 넣어줌
+      /** @type {HTMLButtonElement} */
+      const removeBtn = e.target;
+      removeBtn.parentElement.parentElement.remove();
+    }
   });
 })();
