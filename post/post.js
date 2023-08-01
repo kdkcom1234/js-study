@@ -115,7 +115,7 @@ function cardTemplate(item) {
 // 삭제 기능(이벤트 위임)
 (() => {
   document.body.addEventListener("click", (e) => {
-    alert(e.target.className);
+    // alert(e.target.className);
     // e.target: 실제 이벤트가 발생한요소
     // 해당 클래스가 있는지 확인
     if (

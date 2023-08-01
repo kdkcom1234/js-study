@@ -11,6 +11,48 @@
       tr:hover {
         cursor: pointer;
       }
+      #modify-layer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.7);
+      }
+
+      #modify-layer > div {
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+
+      #modify-box {
+        position: absolute;
+        /* 부모요소의 크기의 절반만큼을 오른쪽/아래쪽으로 이동시킴 */
+        left: 50%;
+        top: 50%;
+        /* 자기 자신 크기의 절반만큼을 왼쪽/위쪽으로 이동시킴 */
+        transform: translateX(-50%)
+          translateY(-50%);
+        background-color: white;
+        width: 500px;
+        padding: 2rem;
+      }
+
+      #modify-box form {
+        display: flex;
+        flex-direction: column;
+      }
+
+      #modify-box form > div {
+        display: flex;
+        gap: 1rem;
+        margin-top: 0.5rem;
+      }
+      #modify-box form > div button {
+        flex: 1;
+      }
     </style>
   </head>
   <body>
@@ -42,66 +84,22 @@
       <button>삭제</button>
     </form>
     <!-- 모달 백그라운드 레이어 -->
-    <div
-      id="modify-layer"
-      hidden
-      style="
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 2;
-        width: 100vw;
-        height: 100vh;
-        background-color: rgba(0, 0, 0, 0.7);
-      "
-    >
+    <div id="modify-layer" hidden>
       <!-- 컨텐츠 감싸는 영역 -->
-      <div
-        style="
-          width: 100%;
-          height: 100%;
-          position: relative;
-        "
-      >
+      <div>
         <!-- 컨텐츠 컨테이너 영역 -->
-        <div
-          style="
-            position: absolute;
-            left: 50vw;
-            top: 50vh;
-            transform: translateX(-50%)
-              translateY(-50%);
-            background-color: white;
-            width: 500px;
-            padding: 2rem;
-          "
-        >
+        <div id="modify-box">
           <h3>hong@gmail.com</h3>
-          <form
-            style="
-              display: flex;
-              flex-direction: column;
-            "
-          >
+          <form>
             <label
               >*이름: <input type="text"
             /></label>
             <label
               >*휴대폰: <input type="tel"
             /></label>
-            <div
-              style="
-                display: flex;
-                gap: 1rem;
-                margin-top: 0.5rem;
-              "
-            >
-              <button style="flex: 1">
-                확인
-              </button>
-              <button style="flex: 1">
-                취소
-              </button>
+            <div>
+              <button>확인</button>
+              <button>취소</button>
             </div>
           </form>
         </div>
