@@ -6,6 +6,7 @@
 
   sidebar.innerHTML = /*html */ `
     <ul>
+      <li><a href="/todo/todo.html">To-do List</a></li>
       <li><a href="/contact/contact.html">Contacts</a></li>
       <li><a href="/post/post.html">Posts</a></li>
       <li><a href="#">Coming soon</a></li>
