@@ -62,24 +62,29 @@
   <body>
     <script src="../sidebar.js"></script>
     <main>
-      <h2>연락처 관리 프로그램</h2>
-      <hr />
       <form action="">
         <!-- MIME type -->
         <!-- application/json, image/jpeg, image/png, text/html -->
         <label
-          >*이름: <input type="text"
+          >*이름:
+          <input type="text" style="width: 80px"
         /></label>
         <label
-          >*휴대폰: <input type="tel"
+          >*휴대폰:
+          <input type="tel" style="width: 90px"
         /></label>
         <label
-          >이메일: <input type="email"
+          >이메일:
+          <input
+            type="email"
+            style="width: 100px"
         /></label>
-        <br />
         <label
           >이미지:
-          <input type="file" accept="image/*"
+          <input
+            type="file"
+            style="width: 140px"
+            accept="image/*"
         /></label>
         <button>추가</button>
       </form>
@@ -95,6 +100,18 @@
         /></label>
         <button>삭제</button>
       </form>
+
+      <hr />
+      검색: <br />
+      <form action="">
+        <input placeholder="이름,전화번호..." />
+        <button>검색</button>
+        <button>초기화</button>
+        &nbsp;&nbsp;&nbsp;
+        <button>이전</button>
+        <button>다음</button>
+      </form>
+
       <!-- 모달 백그라운드 레이어 -->
       <div id="modify-layer" hidden>
         <!-- 컨텐츠 감싸는 영역 -->

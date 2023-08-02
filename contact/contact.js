@@ -1,3 +1,8 @@
+let currentPage = 0; // 현재 페이지 번호
+let isLastPage = false; // 마지막 페이지 인지 여부
+const PAGE_SIZE = 10; // 고정된 페이지 사이즈
+let currentQuery = ""; // 현재 검색 키워드
+
 // template: UI형식의 틀
 function createRow(name, phone, email, image) {
   // 1. 요소 생성
@@ -19,34 +24,172 @@ function createRow(name, phone, email, image) {
   return tr;
 }
 
-// 데이터 조회 및 목록 생성
+// page: 1, currentPage: 0
+// 데이터처리 정상적으로 조회되고, 화면 제대로 나왔으면
+// currentPage: 1
+async function getPagedList(page, query) {
+  let url = "";
+  // 검색 조건이 있다.
+  if (query) {
+    url = `http://localhost:8080/contacts/paging/search?page=${page}&size=${PAGE_SIZE}&query=${query}`;
+  } else {
+    url = `http://localhost:8080/contacts/paging?page=${page}&size=${PAGE_SIZE}`;
+  }
+
+  const response = await fetch(url);
+  // 결과가 배열
+  const result = await response.json();
+  console.log(result);
+
+  const tbody = document.querySelector("tbody");
+
+  // 목록 초기화
+  tbody.innerHTML = "";
+  // 배열 반복을 해서 tr만든다음에 tbody 가장 마지막 자식에 추가
+  for (let item of result.content) {
+    tbody.append(
+      createRow(
+        item.name,
+        item.phone,
+        item.email,
+        item.image
+      )
+    );
+  }
+
+  currentPage = result.number; // 현재 페이지 설정
+  isLastPage = result.last; // 마지막 페이지 여부
+
+  // 이전/다음 버튼 활성화 처리
+  setBtnActive();
+}
+
+// 이전/다음 버튼 활성화 여부 처리
+function setBtnActive() {
+  const buttons =
+    document.forms[2].querySelectorAll("button");
+
+  const btnPrev = buttons[2];
+  const btnNext = buttons[3];
+
+  // 첫번째 페이지이면 이전 버튼 비활성화
+  if (currentPage === 0) {
+    btnPrev.disabled = true;
+  } else {
+    btnPrev.disabled = false;
+  }
+  // 마지막 페이지이면 다음 버튼 비활성화
+  if (isLastPage) {
+    btnNext.disabled = true;
+  } else {
+    btnNext.disabled = false;
+  }
+}
+
+// // 데이터 조회 및 목록 생성
+// (() => {
+//   window.addEventListener(
+//     "DOMContentLoaded",
+//     async () => {
+//       const response = await fetch(
+//         "http://localhost:8080/contacts"
+//       );
+//       // 결과가 배열
+//       const result = await response.json();
+//       console.log(result);
+
+//       const tbody =
+//         document.querySelector("tbody");
+
+//       // 배열 반복을 해서 tr만든다음에 tbody 가장 마지막 자식에 추가
+//       for (let item of result) {
+//         tbody.append(
+//           createRow(
+//             item.name,
+//             item.phone,
+//             item.email,
+//             item.image
+//           )
+//         );
+//       }
+//     }
+//   );
+// })();
+
+// 웹페이지 로딩이 완료되면, 페이징으로 데이터 조회 및 목록 생성
 (() => {
   window.addEventListener(
     "DOMContentLoaded",
-    async () => {
-      const response = await fetch(
-        "http://localhost:8080/contacts"
-      );
-      // 결과가 배열
-      const result = await response.json();
-      console.log(result);
-
-      const tbody =
-        document.querySelector("tbody");
-
-      // 배열 반복을 해서 tr만든다음에 tbody 가장 마지막 자식에 추가
-      for (let item of result) {
-        tbody.append(
-          createRow(
-            item.name,
-            item.phone,
-            item.email,
-            item.image
-          )
-        );
-      }
+    () => {
+      // 첫번째 페이지 조회
+      getPagedList(0);
     }
   );
+})();
+
+// 이전/다음 페이징
+(() => {
+  // 이전/다음 버튼 선택
+  const buttons =
+    document.forms[2].querySelectorAll("button");
+
+  const btnPrev = buttons[2];
+  const btnNext = buttons[3];
+
+  // 이전 버튼
+  btnPrev.addEventListener("click", (e) => {
+    e.preventDefault();
+    currentPage > 0 &&
+      getPagedList(currentPage - 1, currentQuery);
+  });
+  // 다음 버튼
+  btnNext.addEventListener("click", (e) => {
+    e.preventDefault();
+    !isLastPage &&
+      getPagedList(currentPage + 1, currentQuery);
+  });
+})();
+
+// 검색 기능
+(() => {
+  const txtQuery =
+    document.forms[2].querySelector("input");
+  const btnSearch =
+    document.forms[2].querySelector("button");
+
+  btnSearch.addEventListener("click", (e) => {
+    e.preventDefault();
+    currentQuery = txtQuery.value;
+    getPagedList(0, currentQuery);
+  });
+
+  txtQuery.addEventListener("keyup", (e) => {
+    e.preventDefault();
+    if (e.key.toLocaleLowerCase() === "enter") {
+      currentQuery = txtQuery.value;
+      getPagedList(0, currentQuery);
+    }
+  });
+})();
+
+// 검색조건 초기화
+(() => {
+  const btnReset =
+    document.forms[2].querySelectorAll(
+      "button"
+    )[1];
+  btnReset.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    // 검색조건 입력박스 초기화
+    document.forms[2].reset();
+
+    // 검색조건값 초기화
+    currentQuery = "";
+
+    // 검색조건이 초기화되면 0번페이지에서 다시 조회
+    getPagedList(0, currentQuery);
+  });
 })();
 
 // 추가폼 처리
@@ -147,8 +290,6 @@ function createRow(name, phone, email, image) {
 
     // return;
   });
-
-  console.log("추가폼 처리 코드");
 })();
 
 // 삭제폼 처리
