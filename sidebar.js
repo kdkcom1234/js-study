@@ -3,6 +3,7 @@
   sidebar.style.position = "fixed";
   sidebar.style.height = "100vh";
   sidebar.style.width = "200px";
+  sidebar.style.marginTop = "40px";
 
   sidebar.innerHTML = /*html */ `
     <ul>
