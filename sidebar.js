@@ -6,6 +6,7 @@
   sidebar.style.marginTop = "40px";
 
   sidebar.innerHTML = /*html */ `
+    <h3 style="margin-top:0;"><a href="/">Home</a></h3>
     <ul>
       <li><a href="/todo/todo.html">To-do List</a></li>
       <li><a href="/contact/contact.html">Contacts</a></li>
