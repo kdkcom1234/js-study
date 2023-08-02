@@ -20,27 +20,33 @@ function createRow(name, phone, email, image) {
 }
 
 // 데이터 조회 및 목록 생성
-(async () => {
-  const response = await fetch(
-    "http://localhost:8080/contacts"
+(() => {
+  window.addEventListener(
+    "DOMContentLoaded",
+    async () => {
+      const response = await fetch(
+        "http://localhost:8080/contacts"
+      );
+      // 결과가 배열
+      const result = await response.json();
+      console.log(result);
+
+      const tbody =
+        document.querySelector("tbody");
+
+      // 배열 반복을 해서 tr만든다음에 tbody 가장 마지막 자식에 추가
+      for (let item of result) {
+        tbody.append(
+          createRow(
+            item.name,
+            item.phone,
+            item.email,
+            item.image
+          )
+        );
+      }
+    }
   );
-  // 결과가 배열
-  const result = await response.json();
-  console.log(result);
-
-  const tbody = document.querySelector("tbody");
-
-  // 배열 반복을 해서 tr만든다음에 tbody 가장 마지막 자식에 추가
-  for (let item of result) {
-    tbody.append(
-      createRow(
-        item.name,
-        item.phone,
-        item.email,
-        item.image
-      )
-    );
-  }
 })();
 
 // 추가폼 처리
