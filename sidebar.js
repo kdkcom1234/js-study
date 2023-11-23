@@ -17,3 +17,17 @@
 
   document.body.prepend(sidebar);
 })();
+
+function isLocalhost() {
+  return ["localhost", "127.0.0.1"].includes(
+    location.hostname
+  );
+}
+
+function apiUrl() {
+  return `${isLocalhost() ? "http" : "https"}://${
+    isLocalhost()
+      ? `${location.hostname}:8080`
+      : location.hostname
+  }`;
+}

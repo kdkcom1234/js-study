@@ -47,7 +47,7 @@ function cardTemplate(item) {
 }
 
 (async () => {
-  const url = "http://localhost:8080/posts";
+  const url = `${apiUrl()}/api/posts`;
 
   // 1. fetch, 서버에서 데이터 가져오기
   const response = await fetch(url);
